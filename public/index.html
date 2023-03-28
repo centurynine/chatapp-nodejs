@@ -25,6 +25,10 @@
         const input = document.getElementById('input');
         const userID = Date.now();
 
+
+        let name = prompt('Enter your name');
+        socket.emit('newuser', name);
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             if (input.value) {

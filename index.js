@@ -12,15 +12,32 @@ app.get('/', (req,res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connect', (socket) => {
-    console.log('New user connected');
-    socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
-    });
+// io.on('connect', (socket) => {
+//     console.log('New user connected');
+//     socket.on('chat message', (msg) => {
+//         io.emit('chat message', msg);
+//     });
 
-    socket.on('disconnect', () => {
-        console.log('User disconnected');
-    });
+//     socket.on('disconnect', () => {
+//         console.log('User disconnected');
+//     });
+// })
+
+
+io.on('connect', (socket) => {
+    socket.on('newuser', (name) => {
+        let newUser = name;
+        console.log(`${newUser} has joined the chat`);
+
+        socket.on('disconnect', () => {
+            io.emit('disconnected', `${newUser} has left the chat`);
+        })
+
+        socket.on('chat message', (msg) => {
+            io.emit('chat message', msg);
+        });
+
+})
 })
 
 server.listen(port, () => {
