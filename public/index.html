@@ -32,7 +32,9 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             if (input.value) {
+                socket.emit('newuser', name);
                 socket.emit('chat message', {
+                    name : name,
                     user: userID,
                     msg: input.value
                 });
@@ -43,7 +45,7 @@
         socket.on('chat message', (msgObject) => {
             const message = document.createElement('li');
             const messageItem = document.createElement('span');
-            messageItem.textContent = msgObject.msg;
+            messageItem.textContent = `${msgObject.name}: ${msgObject.msg}`;
             if(msgObject.user === userID) {
                 message.classList.add('right');
             }

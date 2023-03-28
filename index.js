@@ -25,19 +25,20 @@ app.get('/', (req,res) => {
 
 
 io.on('connect', (socket) => {
-    socket.on('newuser', (name) => {
+        socket.on('newuser', (name) => {
         let newUser = name;
         console.log(`${newUser} has joined the chat`);
-
+         
         socket.on('disconnect', () => {
             io.emit('disconnected', `${newUser} has left the chat`);
         })
 
-        socket.on('chat message', (msg) => {
-            io.emit('chat message', msg);
-        });
+        
 
-})
+    })
+    socket.on('chat message', (msg) => {
+        io.emit('chat message', msg);
+    })
 })
 
 server.listen(port, () => {
