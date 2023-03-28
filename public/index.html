@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Chat</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
     <h1> Hello, My chat webapp</h1> 
@@ -41,7 +42,6 @@
             messageItem.textContent = msgObject.msg;
             if(msgObject.user === userID) {
                 message.classList.add('right');
-                messageItem.style.color = 'red';
             }
             message.appendChild(messageItem);
             messages.appendChild(message);
